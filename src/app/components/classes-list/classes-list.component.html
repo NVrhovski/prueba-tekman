@@ -1,0 +1,12 @@
+<div class="classes-list-main-container">
+    <div class="classes-list-header">
+        <h4 class="classes-list-title">Sesiones del {{quarter?.name}}</h4>
+        <div class="classes-list-class-counter">
+            <p>{{quarter?.viewedLessons}}/{{quarter?.totalLessons}}</p>
+        </div>
+    </div>
+    <div class="classes-list-body">
+        <app-class-item (selectLessonEvent)="handleLessonSelection($event)" (playLessonEvent)="handleLessonPlay()" *ngFor="let lesson of quarter?.lessons; let i = index" [lesson]="lesson" [index]="i + 1" [selected]="selectedLesson"></app-class-item>
+    </div>
+    <app-play-popup (closePopupEvent)="handleClosePopup()" *ngIf="showPopup"></app-play-popup>
+</div>

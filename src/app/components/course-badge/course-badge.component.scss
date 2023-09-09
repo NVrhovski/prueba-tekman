@@ -1,0 +1,42 @@
+@import '../../../assets/styles/variables.scss';
+
+.course-badge-main-container
+{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    box-shadow: 0px 4px 0px 0px rgba(189, 189, 189, 1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    padding: 20px;
+    &.clickable
+    {
+        cursor: pointer;
+    }
+    .course-badge-text-container
+    {
+        h4 
+        {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+        p
+        {
+            margin: 16px 0 0 0;
+        }
+    }
+    .course-badge-progress-container
+    {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    .course-badge-viewed-icon
+    {
+        width: 40px;
+        height: 40px;
+    }
+}

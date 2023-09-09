@@ -1,0 +1,27 @@
+<div [class]="isOpen ? 'config-tab-main-container-visible' : 'config-tab-main-container'">
+
+</div>
+<div [class]="isOpen ? 'config-tab-sidebar-visible' : 'config-tab-sidebar'">
+    <img (click)="handleTabClose()" src="assets/icons/arrow-right.png" alt="Cerrar" class="config-tab-sidebar-close"/>
+    <h3 class="config-tab-sidebar-title">Configuración</h3>
+    <div class="config-tab-sidebar-inputs">
+        <mat-form-field class="config-tab-sidebar-language">
+            <mat-label>Idioma</mat-label>
+            <mat-select [(value)]="selectedLanguage">
+              <mat-option value="Españól">Españól</mat-option>
+              <mat-option value="Inglés">Inglés</mat-option>
+              <mat-option value="Alemán">Alemán</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="config-tab-sidebar-course">
+            <mat-label>Curso</mat-label>
+            <mat-select [(value)]="selectedCourse" (selectionChange)="handleCourseChange($event.value)">
+              <mat-option *ngFor="let course of courses" value="{{course.id}}">{{course.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="config-tab-sidebar-buttons">
+        <button type="button" class="config-tab-sidebar-buttons-save" (click)="handleSubmit()">Guardar cambios</button>
+        <button (click)="handleTabClose()" type="button" class="config-tab-sidebar-buttons-close">Cerrar sin guardar</button>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+@import '../../../assets/styles/variables.scss';
+
+.class-item-main-container
+{
+    width: 100%;
+    height: 65px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 400ms ease-in-out;
+    &.selected
+    {
+        background-color: $main-orange;
+        color: white;
+    }
+    .class-item-data
+    {
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        &.clickable
+        {
+            cursor: pointer;
+        }
+        .class-item-number
+        {
+            width: fit-content;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+        .class-item-name
+        {
+            width: fit-content;
+            font-size: 20px;
+            margin: 0;
+        }
+    }
+    .class-item-icons
+    {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        .class-item-shuffle-button
+        {
+            width: 25px;
+            height: auto;
+            cursor: pointer;
+        }
+        .class-item-play-container
+        {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            border-radius: 4px;
+            padding: 12px;
+            cursor: pointer;
+            img
+            {
+                width: 100%;
+                height: auto;
+            }
+        }
+        .class-item-availability-icon
+        {
+            width: 30px;
+            height: fit-content;
+        }
+    }
+}

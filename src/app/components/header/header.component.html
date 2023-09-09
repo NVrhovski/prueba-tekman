@@ -1,0 +1,18 @@
+<header class="app-header">
+    <h2 class="app-header-title">Tarjetas</h2>
+    <nav>
+        <ul class="app-header-navbar">
+            <li class="app-header-navbar-item">
+                <img src="assets/icons/menu-icon.png" alt="Menu"/>
+            </li>
+            <li (click)="handleTab(true)" class="app-header-navbar-item" alt="Configuracion">
+                <img src="assets/icons/config-icon.png"/>
+            </li>
+            <li class="app-header-navbar-item" alt="Salir">
+                <img src="assets/icons/exit-icon.png"/>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<app-config-tab [isOpen]="isOpen" (closeTabEvent)="handleTab(false)"></app-config-tab>

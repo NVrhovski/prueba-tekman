@@ -1,0 +1,18 @@
+<div class="current-lesson-main-container">
+    <h3 class="current-lesson-title">Vuelve donde lo dejaste</h3>
+    <p class="current-lesson-subtitle">{{currentLesson?.quarter.name}} - Sesión {{currentLesson?.lesson.id}}, {{currentLesson?.lesson.name}}</p>
+    <div class="current-lesson-actions">
+        <button class="current-lesson-button-primary" (click)="handleLessonPlay()">
+            <img src="assets/icons/play-icon.png"/>
+            <p>Reproducción ordenada</p>
+        </button>
+        <button class="current-lesson-actions-button-secondary">
+            <img src="assets/icons/shuffle-icon.png"/>
+            <p>Aleatorio</p>
+        </button>
+        <button class="current-lesson-actions-button-secondary">
+            <img src="assets/icons/next-icon.png"/>
+            <p>Siguiente sesión</p>
+        </button>
+    </div>
+</div>

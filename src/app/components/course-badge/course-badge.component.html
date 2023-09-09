@@ -1,0 +1,17 @@
+<div *ngIf="isDetail" class="course-badge-main-container">
+    <div class="course-badge-text-container">
+        <h4>{{quarter?.name}}</h4>
+        <p>{{quarter?.viewedLessons}}/{{quarter?.totalLessons}} {{quarter?.totalLessons > 1 ? 'sesiones' : 'sesión'}}</p>
+    </div>
+    <div class="course-badge-progress-container" [style]="'background-image: conic-gradient(rgba(237, 153, 63, 1)' + completedPercentage + '%, rgba(245, 245, 245, 1) ' + completedPercentage + '% ' + (100 - completedPercentage) + '%)'" *ngIf="quarter?.viewedLessons != quarter?.totalLessons"></div>
+    <img class="course-badge-viewed-icon" src="assets/icons/viewed-icon.png" alt="Visto" *ngIf="quarter?.viewedLessons == quarter?.totalLessons"/>
+</div>
+
+<div *ngIf="!isDetail" class="course-badge-main-container clickable" routerLink="quarter/{{quarter?.id}}">
+    <div class="course-badge-text-container">
+        <h4>{{quarter?.name}}</h4>
+        <p>{{quarter?.viewedLessons}}/{{quarter?.totalLessons}} {{quarter?.totalLessons > 1 ? 'sesiones' : 'sesión'}}</p>
+    </div>
+    <div class="course-badge-progress-container" [style]="'background-image: conic-gradient(rgba(237, 153, 63, 1)' + completedPercentage + '%, rgba(245, 245, 245, 1) ' + completedPercentage + '% ' + (100 - completedPercentage) + '%)'" *ngIf="quarter?.viewedLessons != quarter?.totalLessons"></div>
+    <img class="course-badge-viewed-icon" src="assets/icons/viewed-icon.png" alt="Visto" *ngIf="quarter?.viewedLessons == quarter?.totalLessons"/>
+</div>

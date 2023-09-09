@@ -1,0 +1,86 @@
+@import '../../../assets/styles/variables.scss';
+
+.current-lesson-main-container
+{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 8px;
+    padding: 28px;
+    .current-lesson-title
+    {
+        font-family: 'Poppins';
+        font-size: 20px;
+        margin: 0;
+    }
+    .current-lesson-subtitle
+    {
+        font-size: 20px;
+    }
+    .current-lesson-actions
+    {
+        width: 100%;
+        height: auto;
+        display: flex;
+        gap: 16px;
+        .current-lesson-button-primary
+        {
+            width: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 4px 0px 0px rgba(199, 64, 27, 1);
+            background-color: $main-orange;
+            border-radius: 4px;
+            padding: 14px;
+            gap: 10px;
+            transition: all 400ms ease-in-out;
+            &:hover 
+            {
+                background-color: rgba(199, 64, 27, 1);
+            }
+            img
+            {
+                width: 24px;
+                height: auto;
+            }
+            p
+            {
+                color: white;
+                margin: 0;
+                font-weight: 700;
+                font-size: 20px;
+            }
+        }
+        .current-lesson-actions-button-secondary
+        {
+            width: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            padding: 14px;
+            gap: 10px;
+            border-radius: 4px;
+            border: 2px solid $main-orange;
+            background-color: white;
+            transition: all 400ms ease-in-out;
+            &:hover 
+            {
+                background-color: rgb(222, 222, 222);
+            }
+            img
+            {
+                width: 24px;
+                height: auto;
+            }
+            p
+            {
+                color: $main-orange;
+                margin: 0;
+                font-weight: 500;
+                font-size: 20px;
+            }
+        }
+    }
+}

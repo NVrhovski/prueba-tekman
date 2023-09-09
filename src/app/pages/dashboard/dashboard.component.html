@@ -1,0 +1,6 @@
+<main class="dashboard-main-container">
+    <app-current-lesson [currentLesson]="currentCourse?.currentLesson"></app-current-lesson>
+    <app-ongoing-courses [quarters]="currentCourse?.quarters"></app-ongoing-courses>
+</main>
+
+<app-loader *ngIf="loading"></app-loader>

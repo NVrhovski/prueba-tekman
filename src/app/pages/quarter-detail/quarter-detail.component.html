@@ -1,0 +1,12 @@
+<div class="course-detail-main-container">
+    <div class="course-detail-back" routerLink="">
+        <img src="assets/icons/arrow-right.png" alt="Atras" class="course-detail-back-button"/>
+        <p class="course-detail-back-text">Atrás</p>
+    </div>
+    <div class="course-detail-info">
+        <app-course-badge [quarter]="currentQuarter" [isDetail]="true"></app-course-badge>
+        <app-classes-list [quarter]="currentQuarter"></app-classes-list>
+    </div>
+</div>
+
+<app-loader *ngIf="loading"></app-loader>

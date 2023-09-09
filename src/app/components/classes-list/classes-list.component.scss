@@ -1,0 +1,60 @@
+@import '../../../assets/styles/variables.scss';
+
+.classes-list-main-container
+{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    .classes-list-header
+    {
+        width: 100%;
+        height: 80px;
+        border-bottom: 2px solid rgba(224, 224, 224, 1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5%;
+        .classes-list-title
+        {
+            font-weight: 700;
+            font-size: 20px;
+            margin: 0;
+            width: fit-content;
+        }
+        .classes-list-class-counter
+        {
+            width: fit-content;
+            height: auto;
+            background-color: $secondary-orange;
+            padding: 5px 10px;
+            border-radius: 4px;
+            p
+            {
+                color: white;
+                margin: 0;
+                font-size: 20px;
+                font-weight: 300;
+            }
+        }
+    }
+    .classes-list-body
+    {
+        width: 100%;
+        height: 320px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        padding: 20px 0;
+        &::-webkit-scrollbar 
+        {
+            width: 8px;
+        }
+        &::-webkit-scrollbar-thumb 
+        {
+            background: rgba(196, 196, 196, 1);
+            border-radius: 10px;
+        }
+    }
+}

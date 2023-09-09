@@ -1,0 +1,27 @@
+<div [class]="triggerAnimation ? 'play-popup-disclaimer visible' : 'play-popup-disclaimer'">
+    <h4 class="play-popup-disclaimer-title">Antes de empezar...</h4>
+    <div class="play-popup-badges-container">
+        <div class="coruse-detail-badge-item">
+            <div class="play-popup-badge-image">
+                <img src="assets/icons/volume-icon.png" alt="Sonido activado"/>
+            </div>
+            <p class="play-popup-badge-title">Asegúrate de tener el <strong>volumen activado</strong></p>
+        </div>
+        <div class="coruse-detail-badge-item">
+            <div class="play-popup-badge-image">
+                <img src="assets/icons/watch-icon.png" alt="Sonido activado"/>
+            </div>
+            <p class="play-popup-badge-title">Los bits pasan automáticamente <strong>cada 2 segundos</strong>.</p>
+        </div>
+        <div class="coruse-detail-badge-item">
+            <div class="play-popup-badge-image">
+                <img src="assets/icons/pause-icon.png" alt="Sonido activado"/>
+            </div>
+            <p class="play-popup-badge-title">Puedes detener el pase con la <strong>barra espaciadora</strong> o haciendo <strong>clic en la pantalla</strong>.</p>
+        </div>
+    </div>
+    <button class="play-popup-disclaimer-button" (click)="handleClosePopup()">
+        <img src="assets/icons/play-icon.png"/>
+        <p>Empezar pase</p>
+    </button>
+</div>

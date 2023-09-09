@@ -1,0 +1,16 @@
+<div [class]="selected == lesson.id ? 'class-item-main-container selected' : 'class-item-main-container'">
+    <div [class]="lesson?.available ? 'class-item-data clickable' : 'class-item-data'" (click)="handleLessonSelection()">
+        <p class="class-item-number">{{index}}</p>
+        <p class="class-item-name">{{lesson.name}}</p>
+    </div>
+    <div class="class-item-icons" *ngIf="selected == lesson.id">
+        <img class="class-item-shuffle-button" src="assets/icons/white-shuffle-icon.png" alt="Aleatorio"/>
+        <div class="class-item-play-container" (click)="handleLessonPlay()">
+            <img src="assets/icons/orange-play-icon.png" alt="Reproducir"/>
+        </div>
+    </div>
+    <div class="class-item-icons" *ngIf="selected !== lesson.id">
+        <img class="class-item-availability-icon" [src]="lesson?.available ? 'assets/icons/available-icon.png' : 'assets/icons/unavailable-icon.png'"/>
+    </div>
+</div>
+    
