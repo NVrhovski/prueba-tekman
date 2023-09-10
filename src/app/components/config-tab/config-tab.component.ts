@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Course } from 'src/app/interfaces/course';
 import { CourseChangeService } from 'src/app/services/course-change/course-change.service';
 
@@ -7,7 +8,7 @@ import { CourseChangeService } from 'src/app/services/course-change/course-chang
   templateUrl: './config-tab.component.html',
   styleUrls: ['./config-tab.component.scss']
 })
-export class ConfigTabComponent implements OnInit{
+export class ConfigTabComponent implements OnInit, OnDestroy{
   
   @Input() isOpen: boolean;
   @Output() closeTabEvent = new EventEmitter<boolean>();
@@ -15,6 +16,7 @@ export class ConfigTabComponent implements OnInit{
   selectedCourse: string;
   oldCourse: string;
   courses: Course[];
+  coursesSubscription: Subscription;
 
   constructor( 
     private _courseChange: CourseChangeService)
@@ -23,7 +25,7 @@ export class ConfigTabComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this._courseChange.loadCourses.subscribe((res) => {
+    this.coursesSubscription = this._courseChange.loadCourses.subscribe((res) => {
       this.courses = res
       if(!this.selectedCourse)
       {
@@ -49,5 +51,9 @@ export class ConfigTabComponent implements OnInit{
     this._courseChange.changeCourse(this.selectedCourse);
     this.oldCourse = this.selectedCourse;
     this.closeTabEvent.emit(true);
+  }
+
+  ngOnDestroy(): void {
+    this.coursesSubscription.unsubscribe();
   }
 }

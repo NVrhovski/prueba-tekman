@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Course } from 'src/app/interfaces/course';
 import { Quarter } from 'src/app/interfaces/quarter';
 import { ClassesService } from 'src/app/services/classes/classes.service';
@@ -11,13 +12,15 @@ import { CourseChangeService } from 'src/app/services/course-change/course-chang
   templateUrl: './quarter-detail.component.html',
   styleUrls: ['./quarter-detail.component.scss']
 })
-export class QuarterDetailComponent implements OnInit {
+export class QuarterDetailComponent implements OnInit, OnDestroy {
 
   currentCourse: Course;
   currentQuarter: Quarter;
   quarterId: string;
   loading: boolean;
   courses: Course[];
+  courseSubscription: Subscription;
+  courseChangeSubscription: Subscription;
 
   constructor(
     private _titleService: Title, 
@@ -31,14 +34,14 @@ export class QuarterDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCourses();
-    this._courseChangeService.courseChange.subscribe((res) => {
+    this.courseChangeSubscription = this._courseChangeService.courseChange.subscribe((res) => {
       this._router.navigate([''], {queryParams: {course: res}})
     })
   }
 
   getCourses(): void{
     this.loading = true;
-    this._classesService.getAll().subscribe((res) => {
+    this.courseSubscription = this._classesService.getAll().subscribe((res) => {
       this.courses = res.payload;
       this.courses.forEach((course) => {
         course.quarters.forEach((quarter) => {
@@ -58,4 +61,8 @@ export class QuarterDetailComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(): void {
+    this.courseSubscription.unsubscribe();
+    this.courseChangeSubscription.unsubscribe();
+  }
 }

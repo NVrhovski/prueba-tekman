@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Course } from 'src/app/interfaces/course';
 import { ClassesService } from 'src/app/services/classes/classes.service';
 import { CourseChangeService } from 'src/app/services/course-change/course-change.service';
@@ -11,11 +12,14 @@ import { CourseChangeService } from 'src/app/services/course-change/course-chang
   styleUrls: ['./dashboard.component.scss']
 })
 
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit, OnDestroy{
 
   courses: Course[];
   currentCourse: Course;
   loading: boolean;
+  coursesSubscription: Subscription;
+  courseChangeSubscription: Subscription;
+  paramsSubscription: Subscription;
 
   constructor(
     _titleService: Title, 
@@ -28,7 +32,7 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(): void {
     this.getCourses();
-    this._courseChangeService.courseChange.subscribe((res) => {
+    this.courseChangeSubscription = this._courseChangeService.courseChange.subscribe((res) => {
       const index = this.courses.findIndex((course) => course.id.toString() == res)
       this.currentCourse = this.courses[index]
     })
@@ -36,9 +40,9 @@ export class DashboardComponent implements OnInit{
 
   getCourses(): void{
     this.loading = true;
-    this._classesService.getAll().subscribe((res) => {
+    this.coursesSubscription = this._classesService.getAll().subscribe((res) => {
       this.courses = res.payload
-      this._route.queryParams.subscribe((params) => {
+      this.paramsSubscription = this._route.queryParams.subscribe((params) => {
         if(params['course'])
         {
           const index = this.courses.findIndex((course) => course.id.toString() == params['course'])
@@ -57,5 +61,11 @@ export class DashboardComponent implements OnInit{
       this.loading = false;
       this._courseChangeService.emitCourses(res.payload)
     })
+  }
+
+  ngOnDestroy(): void {
+    this.coursesSubscription.unsubscribe();
+    this.courseChangeSubscription.unsubscribe();
+    this.paramsSubscription.unsubscribe();
   }
 }
