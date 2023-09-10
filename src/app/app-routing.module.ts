@@ -5,7 +5,8 @@ import { QuarterDetailComponent } from './pages/quarter-detail/quarter-detail.co
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
-  {path: 'quarter/:id', component: QuarterDetailComponent}
+  {path: 'quarter/:id', component: QuarterDetailComponent},
+  {path: '**', component: DashboardComponent}
 ];
 
 @NgModule({
