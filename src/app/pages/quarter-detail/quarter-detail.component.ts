@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from 'src/app/interfaces/course';
 import { Quarter } from 'src/app/interfaces/quarter';
+import { ClassesService } from 'src/app/services/classes/classes.service';
 import { CourseChangeService } from 'src/app/services/course-change/course-change.service';
 
 @Component({
@@ -16,23 +17,44 @@ export class QuarterDetailComponent implements OnInit {
   currentQuarter: Quarter;
   quarterId: string;
   loading: boolean;
+  courses: Course[];
 
   constructor(
     private _titleService: Title, 
-    private _route: ActivatedRoute, 
-    private _courseChange: CourseChangeService)
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _classesService: ClassesService,
+    private _courseChangeService: CourseChangeService)
   {
     this.quarterId = this._route.snapshot.paramMap.get('id');
-    this.loading = true
   }
 
   ngOnInit(): void {
-    this._courseChange.courseChange.subscribe((res) => {
-      this.currentCourse = res;
-      const index = this.currentCourse.quarters.findIndex((quarter) => quarter.id.toString() == this.quarterId);
-      this.currentQuarter = this.currentCourse.quarters[index];
-      this._titleService.setTitle(`Prueba Tekman | ${this.currentQuarter.name}`);
-      this.loading = false;
+    this.getCourses();
+    this._courseChangeService.courseChange.subscribe((res) => {
+      this._router.navigate([''], {queryParams: {course: res}})
+    })
+  }
+
+  getCourses(): void{
+    this.loading = true;
+    this._classesService.getAll().subscribe((res) => {
+      this.courses = res.payload;
+      this.courses.forEach((course) => {
+        course.quarters.forEach((quarter) => {
+          if(quarter.id.toString() == this.quarterId)
+          {
+            this.currentQuarter = quarter
+          }
+        })
+        if(this.currentQuarter && !this.currentCourse)
+        {
+          this.currentCourse = course
+        }
+      })
+      this._titleService.setTitle(`Prueba Tekman | ${this.currentQuarter?.name}`);
+      this._courseChangeService.emitCourses(res.payload)
+      this.loading = false
     })
   }
 

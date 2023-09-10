@@ -1,7 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Course } from 'src/app/interfaces/course';
-import { ClassesService } from 'src/app/services/classes/classes.service';
 import { CourseChangeService } from 'src/app/services/course-change/course-change.service';
 
 @Component({
@@ -18,30 +16,27 @@ export class ConfigTabComponent implements OnInit{
   oldCourse: string;
   courses: Course[];
 
-  constructor(private classesService: ClassesService, private _router: Router ,private _courseChange: CourseChangeService){
+  constructor( 
+    private _courseChange: CourseChangeService)
+    {
     this.selectedLanguage = "Españól";
   }
 
   ngOnInit(): void {
-    this.getCourses();
+    this._courseChange.loadCourses.subscribe((res) => {
+      this.courses = res
+      if(!this.selectedCourse)
+      {
+        this.selectedCourse = res[0].id.toString();
+        this.oldCourse = this.selectedCourse;
+      }
+    })
   }
 
   handleTabClose(): void
   {
     this.selectedCourse = this.oldCourse;
     this.closeTabEvent.emit(true);
-  }
-
-  getCourses(): void{
-    this.classesService.getAll().subscribe((res) => {
-      this.courses = res.payload
-      this.selectedCourse = this.courses[0].id.toString();
-      this.oldCourse = this.selectedCourse;
-      this._courseChange.changeCourse(this.courses[0]);
-      this._router.events.subscribe((res) => {
-        this.handleSubmit()
-      })
-    })
   }
 
   handleCourseChange(courseId: string)
@@ -51,8 +46,7 @@ export class ConfigTabComponent implements OnInit{
 
   handleSubmit()
   {
-    const index = this.courses.findIndex((course) => course.id.toString() == this.selectedCourse);
-    this._courseChange.changeCourse(this.courses[index]);
+    this._courseChange.changeCourse(this.selectedCourse);
     this.oldCourse = this.selectedCourse;
     this.closeTabEvent.emit(true);
   }

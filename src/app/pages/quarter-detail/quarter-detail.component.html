@@ -1,5 +1,5 @@
 <div class="course-detail-main-container">
-    <div class="course-detail-back" routerLink="">
+    <div class="course-detail-back" routerLink="" [queryParams]="{course: currentCourse?.id}">
         <img src="assets/icons/arrow-right.png" alt="Atras" class="course-detail-back-button"/>
         <p class="course-detail-back-text">Atrás</p>
     </div>

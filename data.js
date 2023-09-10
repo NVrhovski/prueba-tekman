@@ -70,7 +70,7 @@ const data = [
                 ]
             },
             {
-                id: 1,
+                id: 3,
                 name: "3º Trimestre",
                 totalLessons: 3,
                 viewedLessons: 2,
